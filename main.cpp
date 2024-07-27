@@ -6,11 +6,13 @@ bool light_on = false;
 int push_button_counter = 0;
 bool last_button_state = LOW;
 unsigned long last_debounce_time = 0;
-const unsigned long debounce_delay = 50; // задержка на случай дребезга
+const unsigned long debounce_delay = 100; //задержка для дребезга
 
 void setup() {
   pinMode(led_pin, OUTPUT);
-  pinMode(button_pin, INPUT);
+  pinMode(button_pin, INPUT); // Используем внешний подтягивающий резистор
+  Serial.begin(115200); // Инициализация последовательного монитора
+  last_button_state = digitalRead(button_pin); // Инициализация начального состояния кнопки
 }
 
 void loop() {
@@ -23,14 +25,21 @@ void loop() {
   }
 
   if ((millis() - last_debounce_time) > debounce_delay) {
-    // Если состояние кнопки изменилось и оно стало HIGH (нажата)
+    // Если состояние кнопки изменилось и оно стало HIGH
     if (current_button_state == HIGH && last_button_state == LOW) {
       ++push_button_counter;
-    }
-    
-    if (push_button_counter == 3) {
-      light_on = true;
-      push_button_counter = 0;
+      Serial.print("Button pressed: ");
+      Serial.println(push_button_counter);
+
+      if (push_button_counter == 3) {
+        light_on = true;
+        Serial.println("LED ON");
+      }
+      if (push_button_counter == 6) {
+        light_on = false;
+        push_button_counter = 0;
+        Serial.println("LED OFF and counter reset");
+      }
     }
   }
 
@@ -39,9 +48,9 @@ void loop() {
 
   // Управление светодиодом
   if (light_on) {
-    light_on = false;
     digitalWrite(led_pin, HIGH);
-    delay(1000);
-    digitalWrite(led_pin, LOW); // Отключение светодиода после задержки
+  } 
+  else {
+    digitalWrite(led_pin, LOW);
   }
 }
