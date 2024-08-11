@@ -1,51 +1,76 @@
 #include <Arduino.h>
+#include <string>
+#include <vector>
 
-const int led_pin = 39;
-const int button_pin = 18;
+#define LED_PIN 39
+#define CHANNEL_1 0
+#define BUTTON_1 18
+
+using str = std::string;
+
+// мощность свечения
+int power = 4096;
+
+// буффер для приема сообщений
+str message = "";
+std::vector<str> buffer;
+
+
 bool light_on = false;
-int push_button_counter = 0;
-int last_button_state = LOW;
-bool button_pressed = false;
-unsigned long last_pressed;
 
 void setup() {
-  pinMode(button_pin, INPUT); // Используем внешний подтягивающий резистор
-  Serial.begin(115200); // Инициализация последовательного монитора
-  pinMode(led_pin, OUTPUT);
-  delay(1000); // Задержка для инициализации
+  pinMode(BUTTON_1,INPUT);
+  ledcSetup(CHANNEL_1, 5000, 8); // канал 0, частота 5kHz, разрешение 8 бит
+  ledcAttachPin(LED_PIN, 0); // привязать канал 0 к пину
+  Serial.begin(115200);
 }
 
 void loop() {
-  // Чтение текущего состояния кнопки
-  bool current_button_state = digitalRead(button_pin);
-  
-  if (current_button_state && button_pressed == false && millis() - last_pressed > 300 )
-    {
-      ++push_button_counter;
-      Serial.println(push_button_counter);
-      button_pressed = true;
-      last_pressed = millis();
-    }
-    if (!current_button_state && button_pressed == true)
-    {
-      button_pressed = false;
-    }
 
-
-  switch(push_button_counter)
+  if (buffer.size() == 4) 
   {
-    case 2:
-      light_on = true;
-      break;
-    case 4:
-      light_on = false;
-      push_button_counter = 0;
-      break;
+    Serial.println("Последние 4-е сообщения:\n");
+    for (auto msg : buffer)
+    {
+      Serial.println(msg.c_str());
+      delay(20000);
+    }
+    buffer.clear();
   }
-  // Управление светодиодом
-  if (light_on) {
-    digitalWrite(led_pin, HIGH);
-  } else {
-    digitalWrite(led_pin, LOW);
+
+  // читаем данные из серийного порта
+  if (Serial.available() > 0) 
+  {
+    message = "";
+
+    while(Serial.available() > 0)
+    {
+      message += str(1, char(Serial.read()));
+      delay(500);
+    }
+    
+    buffer.push_back(message);
+    power = std::stoi(message);
+
+    Serial.print("Recieved: power = ");
+    Serial.println(power);
+  }
+
+  bool butt_1 = digitalRead(BUTTON_1);
+
+
+  if(butt_1 == HIGH)
+  {
+    light_on = true;
+  }
+
+  if(light_on == true)
+  {
+    light_on = false;
+    ledcWrite(CHANNEL_1, power);
+    delay(1000);
+  }
+  else{
+    ledcWrite(CHANNEL_1, 0);
   }
 }
