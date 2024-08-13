@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/stepan/hw_5.7/build",
+  "command": "/usr/bin/c++    -g   -std=gnu++17 -o CMakeFiles/hw5.dir/src/main.cpp.o -c /home/stepan/hw_5.7/src/main.cpp",
+  "file": "/home/stepan/hw_5.7/src/main.cpp"
+}
+]
