@@ -1,0 +1,13 @@
+[
+{
+  "directory": "/home/stepan/skillbox/hw_6.5/build",
+  "command": "/usr/bin/c++   -I../include  -g   -std=gnu++17 -o CMakeFiles/hw5.dir/src/main.cpp.o -c /home/stepan/skillbox/hw_6.5/src/main.cpp",
+  "file": "/home/stepan/skillbox/hw_6.5/src/main.cpp"
+},
+
+{
+  "directory": "/home/stepan/skillbox/hw_6.5/build",
+  "command": "/usr/bin/c++   -I../include  -g   -std=gnu++17 -o CMakeFiles/hw5.dir/src/Matrix.cpp.o -c /home/stepan/skillbox/hw_6.5/src/Matrix.cpp",
+  "file": "/home/stepan/skillbox/hw_6.5/src/Matrix.cpp"
+}
+]
