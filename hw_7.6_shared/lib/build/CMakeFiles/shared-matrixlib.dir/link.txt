@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -g  -shared -Wl,-soname,shared-matrixlib.so -o shared-matrixlib.so CMakeFiles/shared-matrixlib.dir/matrix.cpp.o CMakeFiles/shared-matrixlib.dir/c_api.cpp.o 

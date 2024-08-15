@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../build/export_shared.h
+
+../matrix.h
+vector
+-
+iostream
+-
+
+/home/stepan/skillbox/hw_7.6_shared/lib/c_api.cpp
+c_api.h
+/home/stepan/skillbox/hw_7.6_shared/lib/c_api.h
+matrix.h
+-
+
+/home/stepan/skillbox/hw_7.6_shared/lib/c_api.h
+build/export_shared.h
+-
+
+/home/stepan/skillbox/hw_7.6_shared/lib/matrix.cpp
+matrix.h
+-
+iostream
+-
+cmath
+-
+

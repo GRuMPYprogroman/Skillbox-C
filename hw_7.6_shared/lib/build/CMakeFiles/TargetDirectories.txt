@@ -1,0 +1,3 @@
+/home/stepan/skillbox/hw_7.6_shared/lib/build/CMakeFiles/edit_cache.dir
+/home/stepan/skillbox/hw_7.6_shared/lib/build/CMakeFiles/rebuild_cache.dir
+/home/stepan/skillbox/hw_7.6_shared/lib/build/CMakeFiles/shared-matrixlib.dir

@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/MatrixLibTest.dir/main.cpp.o  -o MatrixLibTest   -L/home/stepan/skillbox/hw_7.6_shared/exe/libs/matrixlib  -Wl,-rpath,/home/stepan/skillbox/hw_7.6_shared/exe/libs/matrixlib ../libs/matrixlib/shared-matrixlib.so 
