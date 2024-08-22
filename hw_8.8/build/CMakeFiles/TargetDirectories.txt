@@ -1,0 +1,3 @@
+/home/stepan/skillbox/hw_8.8/build/CMakeFiles/rebuild_cache.dir
+/home/stepan/skillbox/hw_8.8/build/CMakeFiles/edit_cache.dir
+/home/stepan/skillbox/hw_8.8/build/CMakeFiles/Snake.dir
